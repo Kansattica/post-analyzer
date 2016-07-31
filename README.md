@@ -13,3 +13,12 @@ Without the -w option, postcheck.py will print the top 5 most commonly used word
 The -w option on its own prints all words and corresponding frequencies. 
 The -w _n_ option with a number will print the top n most commonly used words, or all of them if n is greater than the number of unique words in the post.
 
+-f, --filter
+============
+Without the -f or --filter options, postcheck.py will remove the following common English words from the post before preforming word analysis:
+the, be, to, of, and, a, in, that, it
+The -f and --filter options are identical.
+Specify any number of words after the option to be ignored. For example:
+-f if and but
+excludes "if", "and", and "but" from -w word analysis. Arguments are case insensitive. 
+
