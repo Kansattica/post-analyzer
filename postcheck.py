@@ -38,10 +38,9 @@ def make_arg_dict():
     toReturn = {}
     toReturn[Options.top_words] = parsed_args.w
     toReturn[Options.top_phrases] = parsed_args.p
-    toReturn[Options.to_filter] = map(lambda x: x.lower(), parsed_args.to_filter)
+    toReturn[Options.to_filter] = {x.casefold() for x in parsed_args.to_filter}
 
     return toReturn;
-
 
 def prettyprint_pair_list(from_counter):
     toReturn = ""
@@ -53,8 +52,8 @@ def prettyprint_pair_list(from_counter):
 
 def do_word_frequency(post, option_dict):
 
-#C-c-c-combo!
-    most_frequent_words = Counter(filter(lambda x: x not in option_dict[Options.to_filter], post.translate(str.maketrans("", "", string.punctuation)).lower().split())).most_common(option_dict[Options.top_words])
+    #C-c-c-combo!
+    most_frequent_words = Counter(filter(lambda x: x not in option_dict[Options.to_filter], post.translate(str.maketrans("", "", string.punctuation)).casefold().split())).most_common(option_dict[Options.top_words])
 
     if option_dict[Options.top_words] == None or option_dict[Options.top_words] > len(most_frequent_words):
         start = "Word frequency"
